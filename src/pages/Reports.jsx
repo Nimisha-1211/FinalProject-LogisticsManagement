@@ -1,6 +1,4 @@
 import React from "react";
-// import Navbar from "../components/Navbar";
-// import Sidebar from "../components/Sidebar";
 
 const Reports = () => {
   const shipmentStats = {
@@ -39,20 +37,29 @@ const Reports = () => {
     { name: "Lakshmi", reason: "Route Diversion", shipment: "Groceries" },
   ];
 
+  
+  const delayTrends = [
+    { week: "Week 1", delayed: 4 },
+    { week: "Week 2", delayed: 6 },
+    { week: "Week 3", delayed: 3 },
+    { week: "Week 4", delayed: 7 },
+  ];
+
+ 
+  const warehouseUtilization = [
+    { warehouse: "Warehouse A", utilization: "70%" },
+    { warehouse: "Warehouse B", utilization: "85%" },
+    { warehouse: "Warehouse C", utilization: "60%" },
+  ];
+
   return (
     <>
-        
-      
-
       <div className="container-fluid">
         <div className="row">
-          
-
-          {/* Main Content */}
           <div className="col-md-10 offset-md-2 p-4" style={{ marginTop: "56px" }}>
             <h2 className="mb-4 text-primary">📊 Logistics Reports & Analytics</h2>
 
-            {/* Shipment Summary */}
+
             <div className="row mb-4">
               {Object.entries(shipmentStats).map(([key, value], index) => (
                 <div key={index} className="col-md-3">
@@ -72,7 +79,7 @@ const Reports = () => {
               <ul className="list-group list-group-flush">
                 {topDrivers.map((driver, i) => (
                   <li key={i} className="list-group-item">
-                    {driver.name} – <strong>{driver.deliveries}</strong> deliveries
+                    {driver.name} - <strong>{driver.deliveries}</strong> deliveries
                   </li>
                 ))}
               </ul>
@@ -101,7 +108,7 @@ const Reports = () => {
               </table>
             </div>
 
-            {/* Category-wise Status */}
+            {/* Category-Wise */}
             <div className="card mb-4 shadow-sm">
               <div className="card-header fw-bold">📦 Category-wise Shipment Status</div>
               <table className="table mb-0">
@@ -170,12 +177,55 @@ const Reports = () => {
               </table>
             </div>
 
-            {/* Placeholder for Graphs */}
+            {/* ✅ New Feature: Delay Trends */}
+            <div className="card mb-4 shadow-sm">
+              <div className="card-header fw-bold">📉 Weekly Delay Trends</div>
+              <table className="table mb-0">
+                <thead>
+                  <tr>
+                    <th>Week</th>
+                    <th>Delayed Shipments</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {delayTrends.map((trend, i) => (
+                    <tr key={i}>
+                      <td>{trend.week}</td>
+                      <td>{trend.delayed}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* ✅ New Feature: Warehouse Utilization */}
+            <div className="card mb-4 shadow-sm">
+              <div className="card-header fw-bold">🏭 Warehouse Utilization</div>
+              <table className="table mb-0">
+                <thead>
+                  <tr>
+                    <th>Warehouse</th>
+                    <th>Utilization</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {warehouseUtilization.map((wh, i) => (
+                    <tr key={i}>
+                      <td>{wh.warehouse}</td>
+                      <td>{wh.utilization}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Placeholder for future graphs */}
             <div className="card shadow-sm mb-5">
               <div className="card-body text-muted">
                 📈 <em>Analytics graphs will be added in the future.</em>
               </div>
             </div>
+
           </div>
         </div>
       </div>
