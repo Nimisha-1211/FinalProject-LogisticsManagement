@@ -1,11 +1,26 @@
-import React from "react";
+import React from 'react';
+import './Navbar.css'; // 
 
-const NavbarComponent = () => {
+const Navbar = () => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-4">
-      <a className="navbar-brand" href="/">Logistics Management</a>
+    <nav className="navbar">
+      { /* Logo Section */}
+      <div className="navbar-logo">
+        <a href="/">🚚 Logistics Portal</a>
+      </div>
+
+      {/* Navigation Links */}
+      <ul className="nav-links">
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="/shipments">Shipments</a></li>
+        <li><a href="/login">Login</a></li>
+        <li><a href="/tracking">Tracking</a></li>
+        <li><a href="/reports">Reports</a></li>
+        <li><a href="/profile">Profile</a></li>
+        <li><a href="/About">About</a></li>
+      </ul>
     </nav>
   );
 };
 
-export default NavbarComponent;
+export default Navbar;

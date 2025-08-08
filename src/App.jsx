@@ -1,33 +1,27 @@
-import { useState } from 'react';
-import Test from './pages/test';
-// import Navbar from './Components/NavbarComponent';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import './App.css';
-
-import AdminDashboard from "./pages/AdminDashboard";
-import WarehouseDashboard from "./pages/WarehouseDashboard";
-import DeliveryDashboard from "./pages/DeliveryDashboard";
-import LoginPage from "./pages/LoginPage";
-import {BrowserRouter,Routes,Route} from 'react-router-dom'
-import Reports from './pages/Reports';
+import LoginPage from './pages/LoginPage';
+import AdminDashboard from './pages/AdminDashboard';
+import WarehouseDashboard from './pages/WarehouseDashboard';
+import DeliveryDashboard from './pages/DeliveryDashboard';
+import Shipments from './pages/Shipments';
+import AssignDriver from './pages/AssignDriver';
+import Warehouse from './pages/Warehouse';
 
 function App() {
   return (
-    <>
-      
-    <BrowserRouter>
-    {/* <Navbar/> */}
-     <Routes>
-      <Route path="/" element={<LoginPage />} />
-     <Route path="/admin" element={<AdminDashboard />} />
-     <Route path="/warehouse" element={<WarehouseDashboard />} />
-     <Route path="/delivery" element={<DeliveryDashboard />} />
-     <Route path="/reports" element={<Reports />} />
-     </Routes>
-     </BrowserRouter>
-     
-
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/warehouse-dashboard" element={<WarehouseDashboard />} />
+        <Route path="/delivery" element={<DeliveryDashboard />} />
+        <Route path="/shipments" element={<Shipments />} />
+        <Route path="/assign-driver" element={<AssignDriver />} />
+        <Route path="/warehouse" element={<Warehouse />} />
+      </Routes>
+    </Router>
   );
 }
 
