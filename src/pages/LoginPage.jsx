@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../styles/Login.css';
 
 const roles = [
@@ -16,9 +17,16 @@ function LoginPage() {
     email: '',
     password: '',
     confirmPassword: '',
+    employment: ''
   });
 
+  const navigate = useNavigate();
+
   const handleLoginClick = (role) => {
+    setFormData((prev) => ({
+      ...prev,
+      employment: role,
+    }));
     setSelectedRole(role);
   };
 
@@ -29,8 +37,15 @@ function LoginPage() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Common request options
+    const body = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData)
+    };
 
     if (isRegistering) {
       if (formData.password !== formData.confirmPassword) {
@@ -38,34 +53,36 @@ function LoginPage() {
         return;
       }
 
-      // Registration API logic here (MongoDB)
       alert(
         `Registering ${formData.name} as ${selectedRole} with email: ${formData.email}`
       );
 
-      // Example POST request (backend required)
-      /*
-      fetch('/api/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...formData, role: selectedRole }),
-      }).then(...);
-      */
+      try {
+        const fetching = await fetch('http://localhost:3000/register', body);
+        const response = await fetching.json();
+        console.log(response);
+      } catch (error) {
+        console.error("Registration error:", error);
+      }
 
     } else {
-      // Login API logic here (MongoDB)
       alert(
         `Logging in as ${selectedRole} with email: ${formData.email}`
       );
 
-      // Example POST request (backend required)
-      /*
-      fetch('/api/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: formData.email, password: formData.password }),
-      }).then(...);
-      */
+      try {
+        const fetching = await fetch('http://localhost:3000/login', body);
+        const response = await fetching.json();
+        console.log(response);
+
+        if (fetching.status === 201) {
+          if (selectedRole === 'Admin') navigate('/admin');
+          if (selectedRole === 'Warehouse Manager') navigate('/warehouse-dashboard');
+          if (selectedRole === 'Delivery Staff') navigate('/delivery-dashboard');
+        }
+      } catch (error) {
+        console.error("Login error:", error);
+      }
     }
   };
 
