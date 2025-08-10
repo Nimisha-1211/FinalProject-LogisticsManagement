@@ -1,13 +1,15 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import LoginPage from './pages/LoginPage';
-import AdminDashboard from './pages/AdminDashboard';
-import WarehouseDashboard from './pages/WarehouseDashboard';
-import DeliveryDashboard from './pages/DeliveryDashboard';
-import Shipments from './pages/Shipments';
-import AssignDriver from './pages/AssignDriver';
-import Warehouse from './pages/Warehouse';
+import AddShipment from "./pages/AddShipment";
+import AdminDashboard from "./pages/AdminDashboard";
+import AssignDriver from "./pages/AssignDriver";
+import DeliveryDashboard from "./pages/DeliveryDashboard";
+import LoginPage from "./pages/LoginPage";
+import Reports from "./pages/Reports";
+import Shipments from "./pages/Shipments";
+import Warehouse from "./pages/Warehouse";
+import WarehouseDashboard from "./pages/WarehouseDashboard";
 
 function App() {
   return (
@@ -15,11 +17,13 @@ function App() {
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/admin" element={<AdminDashboard />} />
-        <Route path="/warehouse-dashboard" element={<WarehouseDashboard />} />
-        <Route path="/delivery" element={<DeliveryDashboard />} />
-        <Route path="/shipments" element={<Shipments />} />
+        <Route path="/add-shipment" element={<AddShipment />} />
         <Route path="/assign-driver" element={<AssignDriver />} />
+        <Route path="/delivery-dashboard" element={<DeliveryDashboard />} />
+        <Route path="/reports" element={<Reports />} />
+        <Route path="/shipments" element={<Shipments />} />
         <Route path="/warehouse" element={<Warehouse />} />
+        <Route path="/warehouse-dashboard" element={<WarehouseDashboard />} />
       </Routes>
     </Router>
   );
