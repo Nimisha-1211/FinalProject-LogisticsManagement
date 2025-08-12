@@ -10,6 +10,9 @@ import Reports from "./pages/Reports";
 import Shipments from "./pages/Shipments";
 import Warehouse from "./pages/Warehouse";
 import WarehouseDashboard from "./pages/WarehouseDashboard";
+import AuthServices from "./Components/Services/AuthServices";
+import ShipmentServices from "./Components/Services/ShipmentServices";
+import WarehouseServices from "./Components/Services/WarehouseServices";
 
 function App() {
   return (
@@ -24,6 +27,11 @@ function App() {
         <Route path="/shipments" element={<Shipments />} />
         <Route path="/warehouse" element={<Warehouse />} />
         <Route path="/warehouse-dashboard" element={<WarehouseDashboard />} />
+        <Route path="/AuthService" element={<AuthServices />} />
+        <Route path="/ShipmentServices" element={<ShipmentServices/>} />
+        <Route path="/WarehouseServices" element={<WarehouseServices />} />
+
+        
       </Routes>
     </Router>
   );
