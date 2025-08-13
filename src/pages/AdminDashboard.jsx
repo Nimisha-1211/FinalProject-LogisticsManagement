@@ -1,19 +1,27 @@
 import React, { useState } from "react";
-import "../styles/AdminDashboard.css"; // Optional: Add custom CSS here
+import { Link, useNavigate } from "react-router-dom";
+import "../styles/AdminDashboard.css";
 
 function AdminDashboard() {
   const [users, setUsers] = useState([]);
   const [newUser, setNewUser] = useState({ name: "", role: "" });
   const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setNewUser({ ...newUser, [e.target.name]: e.target.value });
   };
 
   const addUser = () => {
+    if (!newUser.name || !newUser.role) return;
     setUsers([...users, newUser]);
     setNewUser({ name: "", role: "" });
     setShowModal(false);
+  };
+
+  const handleLogout = () => {
+    // logout logic if needed
+    navigate("/");
   };
 
   return (
@@ -23,13 +31,29 @@ function AdminDashboard() {
         <div className="col-md-3 bg-dark text-white min-vh-100 p-3">
           <h4>Admin Panel</h4>
           <ul className="nav flex-column">
-            <li className="nav-item"><a className="nav-link text-white" href="#">User Management</a></li>
-            <li className="nav-item"><a className="nav-link text-white" href="#">Shipment Overview</a></li>
-            <li className="nav-item"><a className="nav-link text-white" href="#">Warehouse Overview</a></li>
-            <li className="nav-item"><a className="nav-link text-white" href="#">Assign Tasks</a></li>
-            <li className="nav-item"><a className="nav-link text-white" href="#">Reports</a></li>
-            <li className="nav-item"><a className="nav-link text-white" href="#">Settings</a></li>
-            <li className="nav-item"><a className="nav-link text-white" href="#">Logout</a></li>
+            <li className="nav-item">
+              <Link className="nav-link text-white" to="/admin">User Management</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link text-white" to="/admin/shipments">Shipment Overview</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link text-white" to="/warehouse">Warehouse Overview</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link text-white" to="/admin/tasks">Assign Tasks</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link text-white" to="/admin/reports">Reports</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link text-white" to="/admin/settings">Settings</Link>
+            </li>
+            <li className="nav-item">
+              <button className="btn btn-link nav-link text-white" onClick={handleLogout}>
+                Logout
+              </button>
+            </li>
           </ul>
         </div>
 
