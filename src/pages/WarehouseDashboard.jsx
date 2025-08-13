@@ -2,15 +2,15 @@ import React, { useState, useEffect } from 'react';
 import '../styles/WarehouseDashboard.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom'; 
 
 function WarehouseDashboard() {
   const [inventory, setInventory] = useState([]);
+  const [item, setItem] = useState('');
   const [form, setForm] = useState({ name: '', quantity: '', location: '' });
   const [editingItem, setEditingItem] = useState(null);
   const [shipmentId, setShipmentId] = useState('');
   const [notifications, setNotifications] = useState(['Low stock: Item-A']);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const mockItems = [
@@ -27,7 +27,7 @@ function WarehouseDashboard() {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     if (editingItem) {
-      setInventory(inventory.map(i => (i.id === editingItem.id ? { ...form, id: editingItem.id } : i)));
+      setInventory(inventory.map(i => (i.id === editingItem.id ? form : i)));
       toast.success("Item updated!");
     } else {
       setInventory([...inventory, { ...form, id: Date.now() }]);
@@ -49,33 +49,25 @@ function WarehouseDashboard() {
 
   const handleDriverRequest = (e) => {
     e.preventDefault();
-    if (!shipmentId) return;
     toast.success(`Driver requested for Shipment ID: ${shipmentId}`);
     setShipmentId('');
-  };
-
-  const handleLogout = () => {
-    navigate("/");
   };
 
   return (
     <div className="container-fluid p-4">
       <ToastContainer />
       <div className="row">
+
         {/* Sidebar */}
         <div className="col-md-3 bg-light p-3 sidebar">
           <h4>Warehouse Manager</h4>
           <ul className="nav flex-column">
             <li className="nav-item"><Link className="nav-link" to="/warehouse">Manage Inventory</Link></li>
-            <li className="nav-item"><Link className="nav-link" to="/warehouse/inbound">Inbound/Outbound</Link></li>
-            <li className="nav-item"><Link className="nav-link" to="/warehouse/assign-driver">Assign Driver</Link></li>
-            <li className="nav-item"><Link className="nav-link" to="/warehouse/shipments">View Shipments</Link></li>
-            <li className="nav-item"><Link className="nav-link" to="/warehouse/notifications">Notifications</Link></li>
-            <li className="nav-item">
-              <button className="btn btn-link nav-link text-danger" onClick={handleLogout}>
-                Logout
-              </button>
-            </li>
+            <li className="nav-item"><a className="nav-link" href="#">Inbound/Outbound</a></li>
+            <li className="nav-item"><Link className="nav-link" to="/assign-driver">Assign Driver</Link></li>
+            <li className="nav-item"><a className="nav-link" href="#">View Shipments</a></li>
+            <li className="nav-item"><a className="nav-link" href="#">Notifications</a></li>
+            <li className="nav-item"><a className="nav-link text-danger" href="#">Logout</a></li>
           </ul>
         </div>
 

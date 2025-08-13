@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import "../styles/DeliveryDashboard.css";
 
 function DeliveryDashboard() {
@@ -13,17 +12,11 @@ function DeliveryDashboard() {
     "Traffic alert near Mysore road"
   ]);
 
-  const navigate = useNavigate();
-
   const handleStatusChange = (id, newStatus) => {
     const updatedShipments = shipments.map((s) =>
       s.id === id ? { ...s, status: newStatus } : s
     );
     setShipments(updatedShipments);
-  };
-
-  const handleLogout = () => {
-    navigate("/");
   };
 
   return (
@@ -103,12 +96,12 @@ function DeliveryDashboard() {
 
       {/* Logout */}
       <div className="text-center">
-        <button className="btn btn-danger" onClick={handleLogout}>
-          🚪 Logout
-        </button>
+        <button className="btn btn-danger">🚪 Logout</button>
       </div>
     </div>
   );
 }
+
+
 
 export default DeliveryDashboard;
