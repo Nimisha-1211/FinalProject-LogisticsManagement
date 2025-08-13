@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../styles/Shipment.css';
+import { Link } from "react-router-dom";
 
 const Shipments = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -93,13 +93,6 @@ const Shipments = () => {
     }
   };
 
-  const handleViewDetails = (shipment) => {
-    if (!viewedProducts.some(item => item.id === shipment.id)) {
-      setViewedProducts(prev => [...prev, shipment]);
-    }
-    alert(`Viewing details for: ${shipment.name}`);
-  };
-
   const filteredShipments = shipments.filter((shipment) => {
     return (
       shipment.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
@@ -110,65 +103,90 @@ const Shipments = () => {
   });
 
   return (
-    <div className="shipments-container">
-      <h2>All Shipments</h2>
+    <div className="container my-4">
+      <h2 className="mb-3">All Shipments</h2>
 
-      <div className="filter-bar">
-        <input
-          type="text"
-          placeholder="Search products..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-
-        <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
-          <option value="">All Statuses</option>
-          <option value="Picked up">Picked up</option>
-          <option value="Pending">Pending</option>
-          <option value="In Transit">In Transit</option>
-          <option value="Delivered">Delivered</option>
-          <option value="Cancled">Cancled</option>
-        </select>
-
-        <select value={subCategoryFilter} onChange={(e) => setSubCategoryFilter(e.target.value)}>
-          <option value="">All Gender Categories</option>
-          <option value="Men's Wear">Men's Wear</option>
-          <option value="Women's Wear">Women's Wear</option>
-        </select>
-
-        <select value={subSubCategoryFilter} onChange={(e) => setSubSubCategoryFilter(e.target.value)}>
-          <option value="">All Subcategories</option>
-          <option value="Tops">Tops</option>
-          <option value="Jeans">Jeans</option>
-          <option value="Jackets">Jackets</option>
-          <option value="Suits">Suits</option>
-          <option value="Gowns">Gowns</option>
-          <option value="Ethnic Wear">Ethnic Wear</option>
-          <option value="Western Wear">Western Wear</option>
-        </select>
+      {/* Filter Bar */}
+      <div className="row g-2 mb-3">
+        <div className="col-md">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Search products..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+        <div className="col-md">
+          <select className="form-select" value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
+            <option value="">All Statuses</option>
+            <option value="Picked up">Picked up</option>
+            <option value="Pending">Pending</option>
+            <option value="In Transit">In Transit</option>
+            <option value="Delivered">Delivered</option>
+            <option value="Cancled">Cancled</option>
+          </select>
+        </div>
+        <div className="col-md">
+          <select className="form-select" value={subCategoryFilter} onChange={(e) => setSubCategoryFilter(e.target.value)}>
+            <option value="">All Gender Categories</option>
+            <option value="Men's Wear">Men's Wear</option>
+            <option value="Women's Wear">Women's Wear</option>
+          </select>
+        </div>
+        <div className="col-md">
+          <select className="form-select" value={subSubCategoryFilter} onChange={(e) => setSubSubCategoryFilter(e.target.value)}>
+            <option value="">All Subcategories</option>
+            <option value="Tops">Tops</option>
+            <option value="Jeans">Jeans</option>
+            <option value="Jackets">Jackets</option>
+            <option value="Suits">Suits</option>
+            <option value="Gowns">Gowns</option>
+            <option value="Ethnic Wear">Ethnic Wear</option>
+            <option value="Western Wear">Western Wear</option>
+          </select>
+        </div>
       </div>
 
-      <div className="shipments-grid">
+      {/* Horizontal Cards */}
+      <div className="list-group">
         {filteredShipments.map((shipment) => (
-          <div key={shipment.id} className="shipment-card">
-            <img src={shipment.imageUrl} alt={shipment.name} className="shipment-image" />
-            <div className="shipment-details">
-              <h3 className="shipment-name">{shipment.name}</h3>
-              <p className="shipment-category">{shipment.mainCategory} - {shipment.subCategory} - {shipment.subSubCategory}</p>
-              <p><strong>From:</strong> {shipment.origin}</p>
-              <p><strong>To:</strong> {shipment.destination}</p>
-              <p><strong>Date:</strong> {shipment.date}</p>
-              <p><strong>Status:</strong> {shipment.status}</p>
-              <p className="shipment-price"><strong>Price:</strong> ₹{shipment.price}</p>
+          <div key={shipment.id} className="list-group-item p-3 mb-3 border rounded d-flex flex-wrap flex-md-nowrap align-items-start">
+            
+            {/* Image */}
+            <img 
+              src={shipment.imageUrl} 
+              alt={shipment.name} 
+              className="img-fluid rounded me-3" 
+              style={{ width: "150px", height: "150px", objectFit: "cover" }} 
+            />
 
-              <div className="shipment-actions">
-                <button className="details-button" onClick={() => handleViewDetails(shipment)}>👁️ View</button>
-                <button className="buy-button" onClick={() => handleBuyNow(shipment)}>🛒 Buy Now</button>
-                <button className="cart-button" onClick={() => handleAddToCart(shipment)}>➕ Add to Cart</button>
-                <button className="wishlist-button" onClick={() => handleAddToWishlist(shipment)}>❤️ Wishlist</button>
-                <button className="delete-button" onClick={() => handleDelete(shipment.id)}>🗑️ Remove</button>
-              </div>
+            {/* Details */}
+            <div className="flex-grow-1">
+              <h5>{shipment.name}</h5>
+              <p className="mb-1 text-muted">{shipment.mainCategory} - {shipment.subCategory} - {shipment.subSubCategory}</p>
+              <p className="mb-1"><strong>From:</strong> {shipment.origin}</p>
+              <p className="mb-1"><strong>To:</strong> {shipment.destination}</p>
+              <p className="mb-1"><strong>Date:</strong> {shipment.date}</p>
+              <p className="mb-1"><strong>Status:</strong> {shipment.status}</p>
+              <p className="fw-bold text-primary mb-2">₹{shipment.price}</p>
             </div>
+
+            {/* Buttons */}
+            <div className="d-flex flex-column gap-2 mt-3 mt-md-0">
+              <Link
+                to={`/shipments/${shipment.id}`}
+                state={{ shipment }}
+                className="btn btn-primary btn-sm"
+              >
+                👁️ View
+              </Link>
+              <button className="btn btn-success btn-sm" onClick={() => handleBuyNow(shipment)}>🛒 Buy Now</button>
+              <button className="btn btn-warning btn-sm" onClick={() => handleAddToCart(shipment)}>➕ Add to Cart</button>
+              <button className="btn btn-danger btn-sm" onClick={() => handleAddToWishlist(shipment)}>❤️ Wishlist</button>
+              <button className="btn btn-secondary btn-sm" onClick={() => handleDelete(shipment.id)}>🗑️ Remove</button>
+            </div>
+
           </div>
         ))}
       </div>
