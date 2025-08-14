@@ -15,6 +15,9 @@ import AuthServices from "./Components/Services/AuthServices";
 import ShipmentServices from "./Components/Services/ShipmentServices";
 import WarehouseServices from "./Components/Services/WarehouseServices";
 import ShipmentDetails from "./pages/ShipmentDetails";
+import UserDashboard from "./pages/UserDashboard";
+import AddressUpdateForm from "./Components/AddressUpdateForm";
+import UserProfile from "./Components/UserProfile";
 
 function App() {
   return (
@@ -33,6 +36,9 @@ function App() {
         <Route path="/AuthService" element={<AuthServices />} />
         <Route path="/ShipmentServices" element={<ShipmentServices />} />
         <Route path="/WarehouseServices" element={<WarehouseServices />} />
+        <Route path="/userdashboard" element={<UserDashboard />} />
+        <Route path="/addressupdateform" element={<AddressUpdateForm />} />
+        <Route path="/userprofile" element={<UserProfile />} />
       </Routes>
     </Router>
   );

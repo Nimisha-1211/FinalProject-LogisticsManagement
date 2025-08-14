@@ -7,6 +7,7 @@ const roles = [
   { name: 'Admin', icon: '🧑‍💼' },
   { name: 'Warehouse Manager', icon: '🏢' },
   { name: 'Delivery Staff', icon: '🚚' },
+  { name: 'User', icon: '👤' }, // ✅ Added User role
 ];
 
 function LoginPage() {
@@ -40,7 +41,6 @@ function LoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Common request options
     const body = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -79,6 +79,7 @@ function LoginPage() {
           if (selectedRole === 'Admin') navigate('/admin');
           if (selectedRole === 'Warehouse Manager') navigate('/warehouse-dashboard');
           if (selectedRole === 'Delivery Staff') navigate('/delivery-dashboard');
+          if (selectedRole === 'User') navigate('/user-dashboard'); // ✅ Added redirect
         }
       } catch (error) {
         console.error("Login error:", error);
