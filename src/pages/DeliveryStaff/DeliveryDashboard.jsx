@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../styles/DeliveryDashboard.css";
+import "../../styles/Admin/DeliveryDashboard.css";
 
 function DeliveryDashboard() {
   const [shipments, setShipments] = useState([

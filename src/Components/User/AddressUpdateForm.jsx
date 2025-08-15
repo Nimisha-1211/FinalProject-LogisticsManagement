@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../styles/AddressUpdateForm.css";
+import "../../styles/User/AddressUpdateForm.css"
 
 const AddressUpdateForm = () => {
   const [address, setAddress] = useState({

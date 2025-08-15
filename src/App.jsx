@@ -1,45 +1,68 @@
-// src/App.jsx
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
-import AddShipment from "./pages/AddShipment";
-import AdminDashboard from "./pages/AdminDashboard";
-import AssignDriver from "./pages/AssignDriver";
-import DeliveryDashboard from "./pages/DeliveryDashboard";
-import LoginPage from "./pages/LoginPage";
-import Reports from "./pages/Reports";
-import Shipments from "./pages/Shipments";
-import Warehouse from "./pages/Warehouse";
-import WarehouseDashboard from "./pages/WarehouseDashboard";
-import AuthServices from "./Components/Services/AuthServices";
-import ShipmentServices from "./Components/Services/ShipmentServices";
-import WarehouseServices from "./Components/Services/WarehouseServices";
-import ShipmentDetails from "./pages/ShipmentDetails";
-import UserDashboard from "./pages/UserDashboard";
-import AddressUpdateForm from "./Components/AddressUpdateForm";
-import UserProfile from "./Components/UserProfile";
+// Common components
+import NavbarComponent from "./Components/Common/NavbarComponent.jsx";
+
+
+// Auth Page
+import LoginPage from "./pages/auth/LoginPage.jsx";
+
+// Admin Pages
+import AdminDashboard from "./pages/admin/AdminDashboard.jsx";
+import Shipments from "./pages/admin/Shipments.jsx";
+import ShipmentDetails from "./pages/admin/ShipmentDetails.jsx";
+import AddShipment from "./pages/admin/AddShipment.jsx";
+import Warehouse from "./pages/admin/Warehouse.jsx";
+import AssignDriver from "./pages/admin/AssignDriver.jsx";
+import Reports from "./pages/admin/Reports.jsx";
+
+// Warehouse Manager Pages
+import WarehouseDashboard from "./pages/WarehouseManager/WarehouseDashboard.jsx";
+
+// Delivery Staff Pages
+import DeliveryDashboard from "./pages/DeliveryStaff/DeliveryDashboard.jsx";
+
+// User Pages
+import UserDashboard from "./pages/user/UserDashboard.jsx";
+import UserProfile from "./components/User/UserProfile.jsx";
+import AddressUpdateForm from "./components/User/AddressUpdateForm.jsx";
 
 function App() {
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<LoginPage />} />
-        <Route path="/admin" element={<AdminDashboard />} />
-        <Route path="/add-shipment" element={<AddShipment />} />
-        <Route path="/assign-driver" element={<AssignDriver />} />
-        <Route path="/delivery-dashboard" element={<DeliveryDashboard />} />
-        <Route path="/reports" element={<Reports />} />
-        <Route path="/shipments" element={<Shipments />} />
-        <Route path="/shipments/:id" element={<ShipmentDetails />} />
-        <Route path="/warehouse" element={<Warehouse />} />
-        <Route path="/warehouse-dashboard" element={<WarehouseDashboard />} />
-        <Route path="/AuthService" element={<AuthServices />} />
-        <Route path="/ShipmentServices" element={<ShipmentServices />} />
-        <Route path="/WarehouseServices" element={<WarehouseServices />} />
-        <Route path="/userdashboard" element={<UserDashboard />} />
-        <Route path="/addressupdateform" element={<AddressUpdateForm />} />
-        <Route path="/userprofile" element={<UserProfile />} />
-      </Routes>
+      {/* Navbar visible on all pages */}
+      <NavbarComponent />
+
+      
+        <Routes>
+          {/* Auth Route */}
+          <Route path="/login" element={<LoginPage />} />
+
+          {/* Admin Routes */}
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin/shipments" element={<Shipments />} />
+          <Route path="/admin/shipments/add" element={<AddShipment />} />
+          <Route path="/admin/shipments/:id" element={<ShipmentDetails />} />
+          <Route path="/admin/warehouse" element={<Warehouse />} />
+          <Route path="/admin/assign-driver" element={<AssignDriver />} />
+          <Route path="/admin/reports" element={<Reports />} />
+
+          {/* Warehouse Manager Routes */}
+          <Route path="/warehouse" element={<WarehouseDashboard />} />
+
+          {/* Delivery Staff Routes */}
+          <Route path="/delivery" element={<DeliveryDashboard />} />
+
+          {/* User Routes */}
+          <Route path="/user" element={<UserDashboard />} />
+          <Route path="/user/profile" element={<UserProfile />} />
+          <Route path="/user/address-update" element={<AddressUpdateForm />} />
+
+          {/* Default Route */}
+          <Route path="/" element={<Navigate to="/login" />} />
+        </Routes>
+      
     </Router>
   );
 }

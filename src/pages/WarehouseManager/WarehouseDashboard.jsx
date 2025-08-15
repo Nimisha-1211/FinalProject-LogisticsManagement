@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../styles/WarehouseDashboard.css';
+import "../../styles/Admin/WarehouseDashboard.css"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Link } from 'react-router-dom'; 
