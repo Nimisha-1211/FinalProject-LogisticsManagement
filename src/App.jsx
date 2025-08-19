@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
 // Common components
+import HomePage from "./pages/LandingPage/HomePage.jsx";
 import NavbarComponent from "./Components/Common/NavbarComponent.jsx";
 
 
@@ -36,6 +37,9 @@ function App() {
 
       
         <Routes>
+          {/* Landing page */}
+          <Route path="/" element={<HomePage/>} />
+
           {/* Auth Route */}
           <Route path="/login" element={<LoginPage />} />
 

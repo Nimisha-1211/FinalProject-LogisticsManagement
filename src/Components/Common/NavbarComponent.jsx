@@ -1,26 +1,51 @@
-import React from 'react';
-import "../../styles/Common/Navbar.css"
+import React, { useState } from "react";
+import "../../styles/Common/Navbar.css";
 
-const Navbar = () => {
+function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <nav className="navbar">
-      { /* Logo Section */}
-      <div className="navbar-logo">
-        <a href="/">🚚 Logistics Portal</a>
+      <div className="nav-logo">Atech Logistics</div>
+
+      <div className={`nav-links ${isOpen ? "open" : ""}`}>
+        {/* Home Direct Link */}
+        <a href="/" className="nav-link">Home</a>
+
+        {/* About Atech Dropdown */}
+        <div className="dropdown">
+          <button className="dropbtn">About Atech ▾</button>
+          <div className="dropdown-content">
+            <a href="#company">Company</a>
+            <a href="#team">Team</a>
+            <a href="#careers">Careers</a>
+          </div>
+        </div>
+
+        {/* Services Dropdown */}
+        <div className="dropdown">
+          <button className="dropbtn">Services ▾</button>
+          <div className="dropdown-content">
+            <a href="#logistics">Logistics</a>
+            <a href="#consulting">Consulting</a>
+            <a href="#support">Support</a>
+          </div>
+        </div>
+
+        {/* Login Direct Link */}
+        <a href="/login" className="nav-link login-link">Login</a>
       </div>
 
-      {/* Navigation Links */}
-      <ul className="nav-links">
-        <li><a href="/dashboard">Dashboard</a></li>
-        <li><a href="/shipments">Shipments</a></li>
-        <li><a href="/login">Login</a></li>
-        <li><a href="/tracking">Tracking</a></li>
-        <li><a href="/reports">Reports</a></li>
-        <li><a href="/profile">Profile</a></li>
-        <li><a href="/About">About</a></li>
-      </ul>
+      {/* Hamburger for mobile */}
+      <div className="hamburger" onClick={toggleMenu}>
+        ☰
+      </div>
     </nav>
   );
-};
+}
 
 export default Navbar;
