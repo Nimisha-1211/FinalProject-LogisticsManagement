@@ -1,9 +1,10 @@
-
 import React, { useState, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import "../../styles/admin/Warehouse.css";
 
+import InventoryTable from "../../Components/Admin/InventoryTable";
+import WarehouseItem from "../../Components/Admin/WarehouseItem";
 
 const Warehouse = () => {
   const [items, setItems] = useState([]);
@@ -76,31 +77,23 @@ const Warehouse = () => {
           )}
         </div>
 
-        <table className="table table-bordered table-striped">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Quantity</th>
-              <th>Location</th>
-              {role === 'Admin' && <th>Actions</th>}
-            </tr>
-          </thead>
-          <tbody>
-            {filteredItems.map(item => (
-              <tr key={item.id}>
-                <td>{item.name}</td>
-                <td>{item.quantity}</td>
-                <td>{item.location}</td>
-                {role === 'Admin' && (
-                  <td>
-                    <button className="btn btn-warning btn-sm me-2" onClick={() => handleEdit(item)}>Edit</button>
-                    <button className="btn btn-danger btn-sm" onClick={() => handleDelete(item.id)}>Delete</button>
-                  </td>
-                )}
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        {/* ✅ Using InventoryTable component */}
+        <InventoryTable items={filteredItems} />
+
+        {/* ✅ Optional: show each item as a card using WarehouseItem */}
+        <div className="row mt-4">
+          {filteredItems.map((item) => (
+            <div className="col-md-4 mb-3" key={item.id}>
+              <WarehouseItem item={item} />
+              {role === 'Admin' && (
+                <div className="mt-2 d-flex">
+                  <button className="btn btn-warning btn-sm me-2" onClick={() => handleEdit(item)}>Edit</button>
+                  <button className="btn btn-danger btn-sm" onClick={() => handleDelete(item.id)}>Delete</button>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
 
       {role === 'Admin' && (

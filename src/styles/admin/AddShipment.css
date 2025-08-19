@@ -32,7 +32,7 @@
 
 .add-shipment-details input:focus,
 .add-shipment-details select:focus {
-  border-color: #007bff;
+  border-color: white;
   outline: none;
 }
 

@@ -36,7 +36,7 @@ transition: border 0.2s ease-in-out;
 
 .filter-bar input:focus,
 .filter-bar select:focus {
-border-color: #007bff;
+border-color: white;
 }
 
 /* Grid for shipment cards */
@@ -166,4 +166,80 @@ background-color: #c82333;
 .shipment-actions {
 flex-direction: column;
 }
+}
+
+
+
+.shipments-container {
+  padding: 20px;
+}
+
+.filters {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.filters input,
+.filters select {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.shipments-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.shipment-card {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.shipment-card h3 {
+  margin: 0 0 10px;
+}
+
+.details-btn {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 6px 12px;
+  background: #007bff;
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+
+.no-results {
+  text-align: center;
+  margin-top: 20px;
+  color: #777;
+}
+
+.shipment-details {
+  padding: 20px;
+}
+
+.shipment-card.big {
+  padding: 25px;
+}
+
+.back-btn {
+  margin-top: 20px;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  background: #444;
+  color: white;
+  cursor: pointer;
+}
+
+.back-btn:hover {
+  background: #222;
 }
