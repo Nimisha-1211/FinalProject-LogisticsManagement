@@ -44,77 +44,61 @@ const AddressUpdateForm = ({ currentAddress, onSave, onCancel }) => {
 
   const handleChange = (field, value) => {
     setAddress(prev => ({ ...prev, [field]: value }));
-    // Clear error when user starts typing
     if (errors[field]) {
       setErrors(prev => ({ ...prev, [field]: '' }));
     }
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6">
-      <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center space-x-3">
-          <MapPin className="w-6 h-6 text-blue-600" />
-          <h3 className="text-lg font-semibold text-gray-900">Update Delivery Address</h3>
+    <div className="card shadow-sm p-4">
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <div className="d-flex align-items-center gap-2">
+          <MapPin className="text-primary" size={24} />
+          <h3 className="h5 mb-0">Update Delivery Address</h3>
         </div>
         {onCancel && (
           <button
             onClick={onCancel}
-            className="p-2 text-gray-400 hover:text-gray-600 transition-colors"
+            className="btn btn-sm btn-light"
           >
-            <X className="w-5 h-5" />
+            <X size={18} />
           </button>
         )}
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Street Address *
-          </label>
+      <form onSubmit={handleSubmit}>
+        {/* Street */}
+        <div className="mb-3">
+          <label className="form-label">Street Address *</label>
           <input
             type="text"
             value={address.street}
             onChange={(e) => handleChange('street', e.target.value)}
-            className={`w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-              errors.street ? 'border-red-500' : 'border-gray-300'
-            }`}
+            className={`form-control ${errors.street ? 'is-invalid' : ''}`}
             placeholder="123 Main Street"
           />
-          {errors.street && (
-            <p className="mt-1 text-sm text-red-600">{errors.street}</p>
-          )}
+          {errors.street && <div className="invalid-feedback">{errors.street}</div>}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              City *
-            </label>
+        {/* City & State */}
+        <div className="row">
+          <div className="col-md-6 mb-3">
+            <label className="form-label">City *</label>
             <input
               type="text"
               value={address.city}
               onChange={(e) => handleChange('city', e.target.value)}
-              className={`w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                errors.city ? 'border-red-500' : 'border-gray-300'
-              }`}
+              className={`form-control ${errors.city ? 'is-invalid' : ''}`}
               placeholder="New York"
             />
-            {errors.city && (
-              <p className="mt-1 text-sm text-red-600">{errors.city}</p>
-            )}
+            {errors.city && <div className="invalid-feedback">{errors.city}</div>}
           </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              State *
-            </label>
+          <div className="col-md-6 mb-3">
+            <label className="form-label">State *</label>
             <select
               value={address.state}
               onChange={(e) => handleChange('state', e.target.value)}
-              className={`w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                errors.state ? 'border-red-500' : 'border-gray-300'
-              }`}
+              className={`form-select ${errors.state ? 'is-invalid' : ''}`}
             >
               <option value="">Select State</option>
               <option value="CA">California</option>
@@ -123,39 +107,29 @@ const AddressUpdateForm = ({ currentAddress, onSave, onCancel }) => {
               <option value="FL">Florida</option>
               <option value="IL">Illinois</option>
             </select>
-            {errors.state && (
-              <p className="mt-1 text-sm text-red-600">{errors.state}</p>
-            )}
+            {errors.state && <div className="invalid-feedback">{errors.state}</div>}
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              ZIP Code *
-            </label>
+        {/* Zip & Country */}
+        <div className="row">
+          <div className="col-md-6 mb-3">
+            <label className="form-label">ZIP Code *</label>
             <input
               type="text"
               value={address.zipCode}
               onChange={(e) => handleChange('zipCode', e.target.value)}
-              className={`w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                errors.zipCode ? 'border-red-500' : 'border-gray-300'
-              }`}
+              className={`form-control ${errors.zipCode ? 'is-invalid' : ''}`}
               placeholder="10001"
             />
-            {errors.zipCode && (
-              <p className="mt-1 text-sm text-red-600">{errors.zipCode}</p>
-            )}
+            {errors.zipCode && <div className="invalid-feedback">{errors.zipCode}</div>}
           </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Country
-            </label>
+          <div className="col-md-6 mb-3">
+            <label className="form-label">Country</label>
             <select
               value={address.country}
               onChange={(e) => handleChange('country', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="form-select"
             >
               <option value="United States">United States</option>
               <option value="Canada">Canada</option>
@@ -164,25 +138,22 @@ const AddressUpdateForm = ({ currentAddress, onSave, onCancel }) => {
           </div>
         </div>
 
-        <div className="flex space-x-3 pt-4">
+        {/* Buttons */}
+        <div className="d-flex gap-2 pt-3">
           <button
             type="submit"
             disabled={isSaving}
-            className={`flex-1 flex items-center justify-center space-x-2 px-4 py-2 rounded-md font-medium transition-colors ${
-              isSaving
-                ? 'bg-gray-100 text-gray-600 cursor-not-allowed'
-                : 'bg-blue-600 text-white hover:bg-blue-700'
-            }`}
+            className={`btn ${isSaving ? 'btn-secondary disabled' : 'btn-primary'}`}
           >
             {isSaving ? (
               <>
-                <div className="animate-spin w-4 h-4 border-2 border-gray-400 border-t-transparent rounded-full"></div>
-                <span>Saving...</span>
+                <span className="spinner-border spinner-border-sm me-2"></span>
+                Saving...
               </>
             ) : (
               <>
-                <Save className="w-4 h-4" />
-                <span>Save Address</span>
+                <Save size={16} className="me-2" />
+                Save Address
               </>
             )}
           </button>
@@ -191,7 +162,7 @@ const AddressUpdateForm = ({ currentAddress, onSave, onCancel }) => {
             <button
               type="button"
               onClick={onCancel}
-              className="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition-colors"
+              className="btn btn-outline-secondary"
             >
               Cancel
             </button>

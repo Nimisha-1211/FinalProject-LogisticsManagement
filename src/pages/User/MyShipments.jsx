@@ -70,14 +70,14 @@ const MyShipments = () => {
     }
   ];
 
-  // Filter shipments based on search term and status
+  // Filter shipments
   const filteredShipments = allShipments.filter(shipment => {
-    const matchesSearch = searchTerm === '' || 
+    const matchesSearch = searchTerm === '' ||
       shipment.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
       shipment.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
       shipment.destination.toLowerCase().includes(searchTerm.toLowerCase());
-    
-    const matchesStatus = statusFilter === 'all' || 
+
+    const matchesStatus = statusFilter === 'all' ||
       shipment.status.toLowerCase().replace(' ', '_') === statusFilter;
 
     return matchesSearch && matchesStatus;
@@ -92,118 +92,117 @@ const MyShipments = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between mb-8">
-          <div>
-            <h1 className="text-3xl font-bold text-gray-900">My Shipments</h1>
-            <p className="text-gray-600 mt-2">Manage and track all your shipments in one place</p>
-          </div>
-          <button className="mt-4 md:mt-0 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2">
-            <Plus className="w-4 h-4" />
-            <span>New Shipment</span>
-          </button>
+    <div className="container py-4">
+      {/* Header */}
+      <div className="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4">
+        <div>
+          <h1 className="h3 fw-bold">My Shipments</h1>
+          <p className="text-muted">Manage and track all your shipments in one place</p>
         </div>
+        <button className="btn btn-primary d-flex align-items-center mt-3 mt-md-0">
+          <Plus size={16} className="me-2" />
+          New Shipment
+        </button>
+      </div>
 
-        {/* Search and Filters */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-          <div className="flex flex-col lg:flex-row gap-4">
-            {/* Search */}
-            <div className="flex-1">
-              <div className="relative">
-                <Search className="w-5 h-5 text-gray-400 absolute left-3 top-3" />
-                <input
-                  type="text"
-                  placeholder="Search by tracking number, description, or destination..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-              </div>
-            </div>
-
-            {/* Status Filter */}
-            <div className="lg:w-64">
-              <div className="relative">
-                <Filter className="w-5 h-5 text-gray-400 absolute left-3 top-3" />
-                <select
-                  value={statusFilter}
-                  onChange={(e) => setStatusFilter(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none bg-white"
-                >
-                  <option value="all">All Status ({statusCounts.all})</option>
-                  <option value="pending">Pending ({statusCounts.pending})</option>
-                  <option value="in_transit">In Transit ({statusCounts.in_transit})</option>
-                  <option value="delivered">Delivered ({statusCounts.delivered})</option>
-                  <option value="delayed">Delayed ({statusCounts.delayed})</option>
-                </select>
-              </div>
+      {/* Search & Filters */}
+      <div className="card shadow-sm mb-4">
+        <div className="card-body row g-3">
+          {/* Search */}
+          <div className="col-lg">
+            <div className="input-group">
+              <span className="input-group-text">
+                <Search size={16} />
+              </span>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Search by tracking number, description, or destination..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
             </div>
           </div>
-        </div>
 
-        {/* Status Overview */}
-        <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
-          {[
-            { key: 'all', label: 'Total', color: 'blue' },
-            { key: 'pending', label: 'Pending', color: 'orange' },
-            { key: 'in_transit', label: 'In Transit', color: 'blue' },
-            { key: 'delivered', label: 'Delivered', color: 'green' },
-            { key: 'delayed', label: 'Delayed', color: 'red' }
-          ].map((item) => (
+          {/* Status Filter */}
+          <div className="col-lg-4">
+            <div className="input-group">
+              <span className="input-group-text">
+                <Filter size={16} />
+              </span>
+              <select
+                className="form-select"
+                value={statusFilter}
+                onChange={(e) => setStatusFilter(e.target.value)}
+              >
+                <option value="all">All Status ({statusCounts.all})</option>
+                <option value="pending">Pending ({statusCounts.pending})</option>
+                <option value="in_transit">In Transit ({statusCounts.in_transit})</option>
+                <option value="delivered">Delivered ({statusCounts.delivered})</option>
+                <option value="delayed">Delayed ({statusCounts.delayed})</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Status Overview */}
+      <div className="row g-3 mb-4">
+        {[
+          { key: 'all', label: 'Total', color: 'primary' },
+          { key: 'pending', label: 'Pending', color: 'warning' },
+          { key: 'in_transit', label: 'In Transit', color: 'info' },
+          { key: 'delivered', label: 'Delivered', color: 'success' },
+          { key: 'delayed', label: 'Delayed', color: 'danger' }
+        ].map((item) => (
+          <div className="col-6 col-lg" key={item.key}>
             <div
-              key={item.key}
+              className={`card text-center border-2 ${statusFilter === item.key ? `border-${item.color}` : ''}`}
+              style={{ cursor: 'pointer' }}
               onClick={() => setStatusFilter(item.key)}
-              className={`bg-white rounded-lg p-4 cursor-pointer transition-all border-2 ${
-                statusFilter === item.key 
-                  ? `border-${item.color}-500 ring-2 ring-${item.color}-200` 
-                  : 'border-gray-200 hover:border-gray-300'
-              }`}
             >
-              <p className="text-sm font-medium text-gray-600">{item.label}</p>
-              <p className="text-2xl font-bold text-gray-900">{statusCounts[item.key]}</p>
+              <div className="card-body p-3">
+                <p className="small text-muted mb-1">{item.label}</p>
+                <h4 className="fw-bold mb-0">{statusCounts[item.key]}</h4>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Shipments List */}
+      {filteredShipments.length === 0 ? (
+        <div className="card text-center p-5">
+          <Package size={48} className="text-muted mb-3 mx-auto" />
+          <h5>No shipments found</h5>
+          <p className="text-muted">
+            {searchTerm || statusFilter !== 'all'
+              ? 'Try adjusting your search or filter criteria.'
+              : "You don't have any shipments yet."}
+          </p>
+          <button className="btn btn-primary">Create New Shipment</button>
+        </div>
+      ) : (
+        <div className="row g-3">
+          {filteredShipments.map((shipment) => (
+            <div className="col-12 col-lg-6" key={shipment.id}>
+              <UserShipmentCard
+                shipment={shipment}
+                onClick={(shipment) => console.log('View shipment:', shipment.id)}
+              />
             </div>
           ))}
         </div>
+      )}
 
-        {/* Shipments List */}
-        <div className="space-y-6">
-          {filteredShipments.length === 0 ? (
-            <div className="bg-white rounded-lg shadow-md p-12 text-center">
-              <Package className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">No shipments found</h3>
-              <p className="text-gray-600 mb-6">
-                {searchTerm || statusFilter !== 'all' 
-                  ? 'Try adjusting your search or filter criteria.'
-                  : 'You don\'t have any shipments yet.'}
-              </p>
-              <button className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">
-                Create New Shipment
-              </button>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {filteredShipments.map((shipment) => (
-                <UserShipmentCard
-                  key={shipment.id}
-                  shipment={shipment}
-                  onClick={(shipment) => console.log('View shipment:', shipment.id)}
-                />
-              ))}
-            </div>
-          )}
+      {/* Results Summary */}
+      {filteredShipments.length > 0 && (
+        <div className="text-center mt-4">
+          <p className="text-muted">
+            Showing {filteredShipments.length} of {allShipments.length} shipments
+          </p>
         </div>
-
-        {/* Results Summary */}
-        {filteredShipments.length > 0 && (
-          <div className="mt-8 text-center">
-            <p className="text-gray-600">
-              Showing {filteredShipments.length} of {allShipments.length} shipments
-            </p>
-          </div>
-        )}
-      </div>
+      )}
     </div>
   );
 };

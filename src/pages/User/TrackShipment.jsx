@@ -1,88 +1,50 @@
-import React, { useState } from 'react';
-import { Search, Package, MapPin, Clock } from 'lucide-react';
-import UserStatusTracker from '../../components/user/UserStatusTracker';
-import InvoiceDownloadButton from '../../components/user/InvoiceDownloadButton';
-import AddressUpdateForm from '../../components/user/AddressUpdateForm';
+import React, { useState } from "react";
+import { Search, Package, MapPin, Clock } from "lucide-react";
+import UserStatusTracker from "../../components/user/UserStatusTracker";
+import InvoiceDownloadButton from "../../components/user/InvoiceDownloadButton";
+import AddressUpdateForm from "../../components/user/AddressUpdateForm";
 
 const TrackShipment = () => {
-  const [trackingNumber, setTrackingNumber] = useState('');
+  const [trackingNumber, setTrackingNumber] = useState("");
   const [shipmentData, setShipmentData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [showAddressUpdate, setShowAddressUpdate] = useState(false);
 
-  // Mock tracking data
+  // Mock data
   const mockShipmentData = {
-    id: 'SH-2025-001',
-    trackingNumber: 'TRK123456789',
-    description: 'Electronics Package',
-    status: 'In Transit',
-    shippedDate: 'Jan 15, 2025',
-    expectedDate: 'Jan 18, 2025',
-    origin: 'San Francisco, CA',
-    destination: 'New York, NY',
-    carrier: 'FedEx Express',
-    weight: '2.5 lbs',
+    id: "SH-2025-001",
+    trackingNumber: "TRK123456789",
+    description: "Electronics Package",
+    status: "In Transit",
+    shippedDate: "Jan 15, 2025",
+    expectedDate: "Jan 18, 2025",
+    origin: "San Francisco, CA",
+    destination: "New York, NY",
+    carrier: "FedEx Express",
+    weight: "2.5 lbs",
     dimensions: '12" x 8" x 6"',
-    value: '899.00',
-    currentLocation: 'Denver, CO',
+    value: "899.00",
+    currentLocation: "Denver, CO",
     trackingSteps: [
-      {
-        title: 'Order Confirmed',
-        description: 'Your shipment has been prepared and confirmed',
-        timestamp: 'Jan 15, 2025 09:00 AM',
-        location: 'San Francisco, CA',
-        completed: true,
-        status: 'confirmed'
-      },
-      {
-        title: 'Picked Up',
-        description: 'Package picked up by carrier',
-        timestamp: 'Jan 15, 2025 02:30 PM',
-        location: 'San Francisco, CA',
-        completed: true,
-        status: 'picked_up'
-      },
-      {
-        title: 'In Transit',
-        description: 'Package is on its way to destination',
-        timestamp: 'Jan 16, 2025 08:15 AM',
-        location: 'Denver, CO',
-        completed: false,
-        status: 'in_transit'
-      },
-      {
-        title: 'Out for Delivery',
-        description: 'Package is out for final delivery',
-        timestamp: '',
-        location: 'New York, NY',
-        completed: false,
-        status: 'out_for_delivery'
-      },
-      {
-        title: 'Delivered',
-        description: 'Package has been delivered successfully',
-        timestamp: '',
-        location: 'New York, NY',
-        completed: false,
-        status: 'delivered'
-      }
+      { title: "Order Confirmed", description: "Your shipment has been prepared and confirmed", timestamp: "Jan 15, 2025 09:00 AM", location: "San Francisco, CA", completed: true, status: "confirmed" },
+      { title: "Picked Up", description: "Package picked up by carrier", timestamp: "Jan 15, 2025 02:30 PM", location: "San Francisco, CA", completed: true, status: "picked_up" },
+      { title: "In Transit", description: "Package is on its way to destination", timestamp: "Jan 16, 2025 08:15 AM", location: "Denver, CO", completed: false, status: "in_transit" },
+      { title: "Out for Delivery", description: "Package is out for final delivery", timestamp: "", location: "New York, NY", completed: false, status: "out_for_delivery" },
+      { title: "Delivered", description: "Package has been delivered successfully", timestamp: "", location: "New York, NY", completed: false, status: "delivered" }
     ]
   };
 
   const mockInvoiceData = {
-    amount: 899.00,
-    date: 'Jan 15, 2025',
-    invoiceNumber: 'INV-SH-2025-001'
+    amount: 899.0,
+    date: "Jan 15, 2025",
+    invoiceNumber: "INV-SH-2025-001",
   };
 
-  const handleTrack = async () => {
+  const handleTrack = () => {
     if (!trackingNumber.trim()) return;
-    
     setIsLoading(true);
-    
-    // Simulate API call
     setTimeout(() => {
-      if (trackingNumber.toLowerCase().includes('trk') || trackingNumber.includes('123')) {
+      if (trackingNumber.toLowerCase().includes("trk") || trackingNumber.includes("123")) {
         setShipmentData(mockShipmentData);
       } else {
         setShipmentData(null);
@@ -92,220 +54,165 @@ const TrackShipment = () => {
   };
 
   const handleAddressUpdate = (newAddress) => {
-    console.log('Address updated:', newAddress);
+    console.log("Address updated:", newAddress);
     setShowAddressUpdate(false);
-    // In a real app, you would update the shipment data here
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
-      <div className="max-w-4xl mx-auto">
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Track Shipment</h1>
-          <p className="text-gray-600 mt-2">Enter your tracking number to get real-time updates</p>
-        </div>
+    <div className="container py-5">
+      {/* Header */}
+      <div className="mb-4">
+        <h1 className="h3 fw-bold">Track Shipment</h1>
+        <p className="text-muted">Enter your tracking number to get real-time updates</p>
+      </div>
 
-        {/* Search Section */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-          <div className="flex flex-col sm:flex-row gap-4">
-            <div className="flex-1">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Tracking Number
-              </label>
+      {/* Search Section */}
+      <div className="card shadow-sm mb-4">
+        <div className="card-body">
+          <div className="row g-3">
+            <div className="col-md-9">
+              <label className="form-label">Tracking Number</label>
               <input
                 type="text"
+                className="form-control"
+                placeholder="Enter tracking number (try: TRK123456789)"
                 value={trackingNumber}
                 onChange={(e) => setTrackingNumber(e.target.value)}
-                placeholder="Enter tracking number (try: TRK123456789)"
-                className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                onKeyPress={(e) => e.key === 'Enter' && handleTrack()}
+                onKeyPress={(e) => e.key === "Enter" && handleTrack()}
               />
             </div>
-            <div className="sm:self-end">
+            <div className="col-md-3 d-flex align-items-end">
               <button
-                onClick={handleTrack}
+                className={`btn w-100 ${isLoading ? "btn-secondary" : "btn-primary"}`}
                 disabled={isLoading || !trackingNumber.trim()}
-                className={`w-full sm:w-auto px-6 py-3 rounded-md font-medium transition-colors flex items-center justify-center space-x-2 ${
-                  isLoading || !trackingNumber.trim()
-                    ? 'bg-gray-100 text-gray-600 cursor-not-allowed'
-                    : 'bg-blue-600 text-white hover:bg-blue-700'
-                }`}
+                onClick={handleTrack}
               >
                 {isLoading ? (
-                  <>
-                    <div className="animate-spin w-5 h-5 border-2 border-gray-400 border-t-transparent rounded-full"></div>
-                    <span>Tracking...</span>
-                  </>
+                  <span className="spinner-border spinner-border-sm me-2"></span>
                 ) : (
-                  <>
-                    <Search className="w-5 h-5" />
-                    <span>Track</span>
-                  </>
+                  <Search size={18} className="me-2" />
                 )}
+                {isLoading ? "Tracking..." : "Track"}
               </button>
             </div>
           </div>
         </div>
+      </div>
 
-        {/* Shipment Results */}
-        {shipmentData && (
-          <div className="space-y-8">
-            {/* Shipment Info */}
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <div className="flex items-start justify-between mb-6">
-                <div className="flex items-center space-x-3">
-                  <div className="p-3 bg-blue-100 rounded-lg">
-                    <Package className="w-8 h-8 text-blue-600" />
+      {/* Shipment Results */}
+      {shipmentData && (
+        <div className="mb-4">
+          <div className="card shadow-sm mb-4">
+            <div className="card-body">
+              <div className="d-flex justify-content-between align-items-start mb-3">
+                <div className="d-flex align-items-center">
+                  <div className="bg-light p-3 rounded me-3">
+                    <Package size={32} className="text-primary" />
                   </div>
                   <div>
-                    <h2 className="text-xl font-semibold text-gray-900">#{shipmentData.id}</h2>
-                    <p className="text-gray-600">{shipmentData.description}</p>
+                    <h5 className="mb-1">#{shipmentData.id}</h5>
+                    <small className="text-muted">{shipmentData.description}</small>
                   </div>
                 </div>
-                <span className="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">
-                  {shipmentData.status}
-                </span>
+                <span className="badge bg-primary">{shipmentData.status}</span>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="space-y-4">
-                  <div>
-                    <h4 className="font-medium text-gray-900 mb-2">Shipment Details</h4>
-                    <div className="space-y-2 text-sm">
-                      <p><span className="text-gray-600">Weight:</span> {shipmentData.weight}</p>
-                      <p><span className="text-gray-600">Dimensions:</span> {shipmentData.dimensions}</p>
-                      <p><span className="text-gray-600">Value:</span> ${shipmentData.value}</p>
-                      <p><span className="text-gray-600">Carrier:</span> {shipmentData.carrier}</p>
-                    </div>
-                  </div>
+              <div className="row">
+                <div className="col-md-4 mb-3">
+                  <h6>Shipment Details</h6>
+                  <ul className="list-unstyled small">
+                    <li><strong>Weight:</strong> {shipmentData.weight}</li>
+                    <li><strong>Dimensions:</strong> {shipmentData.dimensions}</li>
+                    <li><strong>Value:</strong> ${shipmentData.value}</li>
+                    <li><strong>Carrier:</strong> {shipmentData.carrier}</li>
+                  </ul>
                 </div>
-
-                <div className="space-y-4">
-                  <div>
-                    <h4 className="font-medium text-gray-900 mb-2">Journey</h4>
-                    <div className="space-y-2 text-sm">
-                      <div className="flex items-center space-x-2">
-                        <MapPin className="w-4 h-4 text-gray-400" />
-                        <span><span className="text-gray-600">From:</span> {shipmentData.origin}</span>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <MapPin className="w-4 h-4 text-blue-600" />
-                        <span><span className="text-gray-600">Currently:</span> {shipmentData.currentLocation}</span>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <MapPin className="w-4 h-4 text-green-600" />
-                        <span><span className="text-gray-600">To:</span> {shipmentData.destination}</span>
-                      </div>
-                    </div>
-                  </div>
+                <div className="col-md-4 mb-3">
+                  <h6>Journey</h6>
+                  <ul className="list-unstyled small">
+                    <li><MapPin size={14} className="text-muted me-1" /> From: {shipmentData.origin}</li>
+                    <li><MapPin size={14} className="text-primary me-1" /> Currently: {shipmentData.currentLocation}</li>
+                    <li><MapPin size={14} className="text-success me-1" /> To: {shipmentData.destination}</li>
+                  </ul>
                 </div>
-
-                <div className="space-y-4">
-                  <div>
-                    <h4 className="font-medium text-gray-900 mb-2">Timeline</h4>
-                    <div className="space-y-2 text-sm">
-                      <div className="flex items-center space-x-2">
-                        <Clock className="w-4 h-4 text-gray-400" />
-                        <span><span className="text-gray-600">Shipped:</span> {shipmentData.shippedDate}</span>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <Clock className="w-4 h-4 text-blue-600" />
-                        <span><span className="text-gray-600">Expected:</span> {shipmentData.expectedDate}</span>
-                      </div>
-                    </div>
-                  </div>
+                <div className="col-md-4 mb-3">
+                  <h6>Timeline</h6>
+                  <ul className="list-unstyled small">
+                    <li><Clock size={14} className="text-muted me-1" /> Shipped: {shipmentData.shippedDate}</li>
+                    <li><Clock size={14} className="text-primary me-1" /> Expected: {shipmentData.expectedDate}</li>
+                  </ul>
                 </div>
               </div>
 
               {/* Action Buttons */}
-              <div className="mt-6 pt-6 border-t border-gray-200 flex flex-wrap gap-3">
-                <button
-                  onClick={() => setShowAddressUpdate(true)}
-                  className="px-4 py-2 bg-orange-600 text-white rounded-md hover:bg-orange-700 transition-colors"
-                >
+              <div className="mt-3 border-top pt-3 d-flex flex-wrap gap-2">
+                <button className="btn btn-warning text-white" onClick={() => setShowAddressUpdate(true)}>
                   Update Address
                 </button>
-                <button className="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors">
-                  Contact Carrier
-                </button>
-                <button className="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition-colors">
-                  Share Tracking
-                </button>
+                <button className="btn btn-secondary">Contact Carrier</button>
+                <button className="btn btn-outline-secondary">Share Tracking</button>
               </div>
             </div>
+          </div>
 
-            {/* Address Update Form */}
-            {showAddressUpdate && (
-              <AddressUpdateForm
-                currentAddress={{
-                  street: '123 Main Street',
-                  city: 'New York',
-                  state: 'NY',
-                  zipCode: '10001',
-                  country: 'United States'
-                }}
-                onSave={handleAddressUpdate}
-                onCancel={() => setShowAddressUpdate(false)}
+          {showAddressUpdate && (
+            <AddressUpdateForm
+              currentAddress={{
+                street: "123 Main Street",
+                city: "New York",
+                state: "NY",
+                zipCode: "10001",
+                country: "United States",
+              }}
+              onSave={handleAddressUpdate}
+              onCancel={() => setShowAddressUpdate(false)}
+            />
+          )}
+
+          <div className="row g-4">
+            <div className="col-lg-8">
+              <UserStatusTracker
+                trackingSteps={shipmentData.trackingSteps}
+                currentStatus={shipmentData.status.toLowerCase().replace(" ", "_")}
               />
-            )}
+            </div>
+            <div className="col-lg-4">
+              <InvoiceDownloadButton shipmentId={shipmentData.id} invoiceData={mockInvoiceData} />
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              {/* Status Tracker */}
-              <div className="lg:col-span-2">
-                <UserStatusTracker 
-                  trackingSteps={shipmentData.trackingSteps}
-                  currentStatus={shipmentData.status.toLowerCase().replace(' ', '_')}
-                />
-              </div>
-
-              {/* Actions Sidebar */}
-              <div className="space-y-6">
-                <InvoiceDownloadButton 
-                  shipmentId={shipmentData.id}
-                  invoiceData={mockInvoiceData}
-                />
-
-                {/* Quick Info */}
-                <div className="bg-white rounded-lg shadow-md p-6">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Need Help?</h3>
-                  <div className="space-y-3">
-                    <div className="p-3 bg-blue-50 rounded-lg">
-                      <h4 className="font-medium text-blue-900 text-sm">Track by Email</h4>
-                      <p className="text-xs text-blue-700 mt-1">Get updates sent to your email</p>
-                    </div>
-                    
-                    <div className="p-3 bg-green-50 rounded-lg">
-                      <h4 className="font-medium text-green-900 text-sm">SMS Notifications</h4>
-                      <p className="text-xs text-green-700 mt-1">Receive text message updates</p>
-                    </div>
-                    
-                    <button className="w-full text-left p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-                      <h4 className="font-medium text-gray-900 text-sm">Contact Support</h4>
-                      <p className="text-xs text-gray-600 mt-1">Get help with your shipment</p>
-                    </button>
+              <div className="card shadow-sm mt-4">
+                <div className="card-body">
+                  <h6 className="fw-bold mb-3">Need Help?</h6>
+                  <div className="mb-2 p-3 bg-light rounded">
+                    <h6 className="small fw-bold text-primary mb-1">Track by Email</h6>
+                    <small className="text-muted">Get updates sent to your email</small>
                   </div>
+                  <div className="mb-2 p-3 bg-light rounded">
+                    <h6 className="small fw-bold text-success mb-1">SMS Notifications</h6>
+                    <small className="text-muted">Receive text message updates</small>
+                  </div>
+                  <button className="btn btn-light w-100 text-start">
+                    <h6 className="small fw-bold mb-1">Contact Support</h6>
+                    <small className="text-muted">Get help with your shipment</small>
+                  </button>
                 </div>
               </div>
             </div>
           </div>
-        )}
+        </div>
+      )}
 
-        {/* No Results */}
-        {trackingNumber && !shipmentData && !isLoading && (
-          <div className="bg-white rounded-lg shadow-md p-12 text-center">
-            <Package className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">Shipment Not Found</h3>
-            <p className="text-gray-600 mb-6">
-              We couldn't find a shipment with tracking number "{trackingNumber}".
-              Please check the number and try again.
-            </p>
-            <p className="text-sm text-gray-500">
-              Try using: TRK123456789 for demo purposes
-            </p>
-          </div>
-        )}
-      </div>
+      {/* No Results */}
+      {trackingNumber && !shipmentData && !isLoading && (
+        <div className="card shadow-sm text-center p-5">
+          <Package size={48} className="text-muted mb-3 mx-auto" />
+          <h5 className="fw-bold">Shipment Not Found</h5>
+          <p className="text-muted">
+            We couldn't find a shipment with tracking number "{trackingNumber}".<br />
+            Please check the number and try again.
+          </p>
+          <small className="text-secondary">Try using: TRK123456789 for demo purposes</small>
+        </div>
+      )}
     </div>
   );
 };
