@@ -10,7 +10,7 @@ function Navbar() {
 
   return (
     <nav className="navbar">
-      <div className="nav-logo">Atech Logistics</div>
+      <div className="nav-logo">Mark8 Logistics</div>
 
       <div className={`nav-links ${isOpen ? "open" : ""}`}>
         {/* Home Direct Link */}
@@ -18,7 +18,7 @@ function Navbar() {
 
         {/* About Atech Dropdown */}
         <div className="dropdown">
-          <button className="dropbtn">About Atech ▾</button>
+          <button className="dropbtn">About Us▾</button>
           <div className="dropdown-content">
             <a href="#company">Company</a>
             <a href="#team">Team</a>

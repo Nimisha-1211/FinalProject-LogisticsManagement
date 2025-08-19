@@ -10,7 +10,7 @@ function Footer() {
 
         {/* Left: Logo */}
         <div className="footer-logo">
-          <img src="/logo.png" alt="Atech Logo" className="logo" />
+          <img src="/logo.png" alt="Mark8 Logo" className="logo" />
           <p className="subtitle">Logistics & Distribution</p>
         </div>
 
@@ -38,7 +38,7 @@ function Footer() {
         <div className="footer-contact">
           <h4>CONTACT ATECH</h4>
           <p><strong>Phone</strong> 707-526-1910</p>
-          <p><strong>Email</strong> info@atechlogistics.com</p>
+          <p><strong>Email</strong> info@mark8logistics.com</p>
 
           <h4>CORPORATE OFFICE</h4>
           <p>7 College Avenue<br />Delhi, India 495452</p>
@@ -51,7 +51,7 @@ function Footer() {
       </div>
 
       <div className="footer-bottom">
-        <p>Copyright © 2025 Atech Logistics</p>
+        <p>Copyright © 2025 Mark8 Logistics</p>
       </div>
     </footer>
     </div>
