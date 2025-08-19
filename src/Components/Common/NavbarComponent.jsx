@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "../../styles/Common/Navbar.css";
 
 function Navbar() {
@@ -13,20 +14,17 @@ function Navbar() {
       <div className="nav-logo">Mark8 Logistics</div>
 
       <div className={`nav-links ${isOpen ? "open" : ""}`}>
-        {/* Home Direct Link */}
-        <a href="/" className="nav-link">Home</a>
+        <Link to="/" className="nav-link">Home</Link>
 
-        {/* About Atech Dropdown */}
         <div className="dropdown">
           <button className="dropbtn">About Us▾</button>
           <div className="dropdown-content">
-            <a href="#company">Company</a>
+            <Link to="/aboutus">Company</Link>
             <a href="#team">Team</a>
             <a href="#careers">Careers</a>
           </div>
         </div>
 
-        {/* Services Dropdown */}
         <div className="dropdown">
           <button className="dropbtn">Services ▾</button>
           <div className="dropdown-content">
@@ -36,11 +34,9 @@ function Navbar() {
           </div>
         </div>
 
-        {/* Login Direct Link */}
-        <a href="/login" className="nav-link login-link">Login</a>
+        <Link to="/login" className="nav-link login-link">Login</Link>
       </div>
 
-      {/* Hamburger for mobile */}
       <div className="hamburger" onClick={toggleMenu}>
         ☰
       </div>

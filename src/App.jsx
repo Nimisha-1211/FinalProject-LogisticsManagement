@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 // Common components
 import HomePage from "./pages/LandingPage/HomePage.jsx";
 import NavbarComponent from "./Components/Common/NavbarComponent.jsx";
+import AboutUsPage from "./pages/LandingPage/AboutUsPage.jsx"
 
 
 // Auth Page
@@ -39,6 +40,7 @@ function App() {
         <Routes>
           {/* Landing page */}
           <Route path="/" element={<HomePage/>} />
+          <Route path="/aboutus" element={<AboutUsPage/>} />
 
           {/* Auth Route */}
           <Route path="/login" element={<LoginPage />} />
