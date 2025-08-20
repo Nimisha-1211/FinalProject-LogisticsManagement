@@ -24,8 +24,8 @@ import WarehouseDashboard from "./pages/WarehouseManager/WarehouseDashboard.jsx"
 
 // Delivery Staff Pages
 import DeliveryDashboard from "./pages/DeliveryStaff/DeliveryDashboard.jsx";
-import assignedshipments from "./pages/DeliveryStaff/AssignedShipments.jsx"
-import updateshipmentstatus from "./pages/DeliveryStaff/UpdateShipmentStatus.jsx"
+import AssignedShipments from "./pages/DeliveryStaff/AssignedShipments.jsx"
+import UpdateShipmentStatus from "./pages/DeliveryStaff/UpdateShipmentStatus.jsx"
 
 // User Pages
 import UserDashboard from "./pages/User/UserDashboard.jsx";
@@ -34,6 +34,7 @@ import AddressUpdateForm from "./components/User/AddressUpdateForm.jsx";
 import MyShipments from "./pages/User/MyShipments.jsx";
 import TrackShipment from "./pages/User/TrackShipment.jsx"
 import ShipmentHistory from "./pages/User/ShipmentHistory.jsx"
+import InvoiceDownloadButton from "./components/user/InvoiceDownloadButton.jsx";
 
 
 function App() {
@@ -70,11 +71,12 @@ function App() {
 
           {/* User Routes */}
           <Route path="/user" element={<UserDashboard />} />
-          <Route path="/user/profile" element={<UserProfile />} />
+          <Route path="/userprofile" element={<UserProfile />} />
           <Route path="/user/address-update" element={<AddressUpdateForm />} />
           <Route path="/myshipments" element={<MyShipments />} />
           <Route path="/track" element={<TrackShipment />} />
           <Route path="/history" element={<ShipmentHistory />} />
+          <Route path="/invoicedownload" element={<InvoiceDownloadButton />} />
         
 
           {/* Default Route */}
