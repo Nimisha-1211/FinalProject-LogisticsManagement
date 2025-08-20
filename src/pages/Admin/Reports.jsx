@@ -1,5 +1,5 @@
 import React from "react";
-import InventoryTable from "../../Components/Admin/InventoryTable";
+import InventoryTable from "../../components/Admin/InventoryTable";
 
 const Reports = () => {
   const shipmentStats = {

@@ -3,8 +3,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import "../../styles/admin/Warehouse.css";
 
-import InventoryTable from "../../Components/Admin/InventoryTable";
-import WarehouseItem from "../../Components/Admin/WarehouseItem";
+import InventoryTable from "../../components/Admin/InventoryTable";
+import WarehouseItem from "../../components/Admin/WarehouseItem";
 
 const Warehouse = () => {
   const [items, setItems] = useState([]);

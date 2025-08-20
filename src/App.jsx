@@ -2,8 +2,9 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
 // Common components
-import NavbarComponent from "./Components/Common/NavbarComponent.jsx";
-
+import NavbarComponent from "./components/Common/NavbarComponent.jsx";
+import HomePage from "./pages/LandingPage/HomePage.jsx";
+import AboutUsPage from "./pages/LandingPage/AboutUsPage.jsx";
 
 // Auth Page
 import LoginPage from "./pages/auth/LoginPage.jsx";
@@ -18,7 +19,7 @@ import AddShipment from "./pages/Admin/AddShipment.jsx";
 import Warehouse from "./pages/Admin/Warehouse.jsx";
 import AssignDriver from "./pages/Admin/AssignDriver.jsx";
 import Reports from "./pages/Admin/Reports.jsx";
-import Settings from "./pages/Admin/Settings.jsx";
+import AdminSettings from "./pages/Admin/AdminSettings.jsx";
 import AssignTasks from "./pages/Admin/AssignTasks"; 
 import AssignVehicle from "./pages/Admin/AssignVehicle.jsx";
 import AssignManager from "./pages/Admin/AssignWarehouseManager.jsx";
@@ -27,16 +28,18 @@ import AssignRoute from "./pages/Admin/AssignRoute.jsx";
 // Warehouse Manager Pages
 import WarehouseDashboard from "./pages/WarehouseManager/WarehouseDashboard.jsx";
 import Inventory from "./pages/WarehouseManager/Inventory.jsx";
-import orders from "./pages/WarehouseManager/orders.jsx";
+import Orders from "./pages/WarehouseManager/Orders.jsx";
 import Settings from "./pages/WarehouseManager/Settings.jsx";
 
 // Delivery Staff Pages
 import DeliveryDashboard from "./pages/DeliveryStaff/DeliveryDashboard.jsx";
+import AssignedShipments from "./pages/DeliveryStaff/AssignedShipments.jsx";
+import UpdateShipmentStatus from "./pages/DeliveryStaff/UpdateShipmentStatus.jsx";
 
 // User Pages
 import UserDashboard from "./pages/User/UserDashboard.jsx";
-import UserProfile from "./components/User/UserProfile.jsx";
-import AddressUpdateForm from "./components/User/AddressUpdateForm.jsx";
+import UserProfile from "./components/user/UserProfile.jsx";
+import AddressUpdateForm from "./components/user/AddressUpdateForm.jsx";
 import MyShipments from "./pages/User/MyShipments.jsx";
 import TrackShipment from "./pages/User/TrackShipment.jsx"
 import ShipmentHistory from "./pages/User/ShipmentHistory.jsx"
@@ -71,7 +74,7 @@ function App() {
           <Route path="assign-route" element={<AssignRoute />} />
           <Route path="assign-tasks" element={<AssignTasks />} />
           <Route path="reports" element={<Reports />} />
-          <Route path="settings" element={<Settings />} />
+          <Route path="settings" element={<AdminSettings />} />
         </Route>
 
 

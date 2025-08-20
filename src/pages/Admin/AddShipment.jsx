@@ -1,5 +1,5 @@
 import React from "react";
-import InboundOutboundForm from "../../Components/Admin/InboundOutboundForm";
+import InboundOutboundForm from "../../components/Admin/InboundOutboundForm";
 
 const AddShipment = () => {
   return (
