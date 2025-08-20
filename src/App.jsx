@@ -27,7 +27,7 @@ import AssignRoute from "./pages/Admin/AssignRoute.jsx";
 // Warehouse Manager Pages
 import WarehouseDashboard from "./pages/WarehouseManager/WarehouseDashboard.jsx";
 import Inventory from "./pages/WarehouseManager/Inventory.jsx";
-import Orders from "./pages/WarehouseManager/Orders.jsx";
+import orders from "./pages/WarehouseManager/orders.jsx";
 import Settings from "./pages/WarehouseManager/Settings.jsx";
 
 // Delivery Staff Pages
@@ -76,7 +76,11 @@ function App() {
 
 
         {/* Warehouse Manager Routes */}
-        <Route path="/warehouse" element={<WarehouseDashboard />} />
+          <Route path="/warehouse-dashboard" element={<WarehouseDashboard />} />
+          <Route path="/inventory" element={<Inventory />} />
+          <Route path="/orders" element={<Orders />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/assign-driver" element={<AssignDriver />} />
 
           {/* Delivery Staff Routes */}
           <Route path="/delivery" element={<DeliveryDashboard />} />
