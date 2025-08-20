@@ -9,13 +9,20 @@ import NavbarComponent from "./Components/Common/NavbarComponent.jsx";
 import LoginPage from "./pages/auth/LoginPage.jsx";
 
 // Admin Pages
-import AdminDashboard from "./pages/admin/AdminDashboard.jsx";
-import Shipments from "./pages/admin/Shipments.jsx";
-import ShipmentDetails from "./pages/admin/ShipmentDetails.jsx";
-import AddShipment from "./pages/admin/AddShipment.jsx";
-import Warehouse from "./pages/admin/Warehouse.jsx";
-import AssignDriver from "./pages/admin/AssignDriver.jsx";
-import Reports from "./pages/admin/Reports.jsx";
+import AdminLayout from "./pages/Admin/AdminLayout.jsx"; 
+import AdminDashboard from "./pages/Admin/AdminDashboard.jsx";
+import UserManagement from "./pages/Admin/UserManagement.jsx";
+import Shipments from "./pages/Admin/Shipments.jsx";
+import ShipmentDetails from "./pages/Admin/ShipmentDetails.jsx";
+import AddShipment from "./pages/Admin/AddShipment.jsx";
+import Warehouse from "./pages/Admin/Warehouse.jsx";
+import AssignDriver from "./pages/Admin/AssignDriver.jsx";
+import Reports from "./pages/Admin/Reports.jsx";
+import Settings from "./pages/Admin/Settings.jsx";
+import AssignTasks from "./pages/Admin/AssignTasks"; 
+import AssignVehicle from "./pages/Admin/AssignVehicle.jsx";
+import AssignManager from "./pages/Admin/AssignWarehouseManager.jsx";
+import AssignRoute from "./pages/Admin/AssignRoute.jsx";
 
 // Warehouse Manager Pages
 import WarehouseDashboard from "./pages/WarehouseManager/WarehouseDashboard.jsx";
@@ -50,17 +57,26 @@ function App() {
           {/* Auth Route */}
           <Route path="/login" element={<LoginPage />} />
 
-          {/* Admin Routes */}
-          <Route path="/admin" element={<AdminDashboard />} />
-          <Route path="/admin/shipments" element={<Shipments />} />
-          <Route path="/admin/shipments/add" element={<AddShipment />} />
-          <Route path="/admin/shipments/:id" element={<ShipmentDetails />} />
-          <Route path="/admin/warehouse" element={<Warehouse />} />
-          <Route path="/admin/assign-driver" element={<AssignDriver />} />
-          <Route path="/admin/reports" element={<Reports />} />
+        {/* Admin Routes */}
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route index element={<AdminDashboard />} />
+          <Route path="users" element={<UserManagement />} />
+          <Route path="shipments" element={<Shipments />} />
+          <Route path="shipments/:id" element={<ShipmentDetails />} />
+          <Route path="add-shipment" element={<AddShipment />} />
+          <Route path="warehouse" element={<Warehouse />} />
+          <Route path="assign-driver" element={<AssignDriver />} />
+          <Route path="assign-vehicle" element={<AssignVehicle />} />
+          <Route path="assign-manager" element={<AssignManager />} />
+          <Route path="assign-route" element={<AssignRoute />} />
+          <Route path="assign-tasks" element={<AssignTasks />} />
+          <Route path="reports" element={<Reports />} />
+          <Route path="settings" element={<Settings />} />
+        </Route>
 
-          {/* Warehouse Manager Routes */}
-          <Route path="/warehouse" element={<WarehouseDashboard />} />
+
+        {/* Warehouse Manager Routes */}
+        <Route path="/warehouse" element={<WarehouseDashboard />} />
 
           {/* Delivery Staff Routes */}
           <Route path="/delivery" element={<DeliveryDashboard />} />
