@@ -2,7 +2,9 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
 // Common components
+import HomePage from "./pages/LandingPage/HomePage.jsx";
 import NavbarComponent from "./Components/Common/NavbarComponent.jsx";
+import AboutUsPage from "./pages/LandingPage/AboutUsPage.jsx"
 
 
 // Auth Page
@@ -32,12 +34,13 @@ import Settings from "./pages/WarehouseManager/Settings.jsx";
 
 // Delivery Staff Pages
 import DeliveryDashboard from "./pages/DeliveryStaff/DeliveryDashboard.jsx";
+import assignedshipments from "./pages/DeliveryStaff/AssignedShipments.jsx"
+import updateshipmentstatus from "./pages/DeliveryStaff/UpdateShipmentStatus.jsx"
 
 // User Pages
-import UserDashboard from "./pages/User/UserDashboard.jsx";
-import UserProfile from "./Components/User/UserProfile.jsx";
-import AddressUpdateForm from "./Components/User/AddressUpdateForm.jsx";
-
+import UserDashboard from "./pages/user/UserDashboard.jsx";
+import UserProfile from "./components/User/UserProfile.jsx";
+import AddressUpdateForm from "./components/User/AddressUpdateForm.jsx";
 
 function App() {
   return (
@@ -45,10 +48,10 @@ function App() {
       {/* Navbar visible on all pages */}
       <NavbarComponent />
 
-
-      <Routes>
-        {/* Auth Route */}
-        <Route path="/login" element={<LoginPage />} />
+      
+        <Routes>
+          {/* Auth Route */}
+          <Route path="/login" element={<LoginPage />} />
 
         {/* Admin Routes */}
         <Route path="/admin" element={<AdminLayout />}>
@@ -76,13 +79,13 @@ function App() {
           <Route path="/settings" element={<Settings />} />
           <Route path="/assign-driver" element={<AssignDriver />} />
 
-        {/* Delivery Staff Routes */}
-        <Route path="/delivery" element={<DeliveryDashboard />} />
+          {/* Delivery Staff Routes */}
+          <Route path="/delivery" element={<DeliveryDashboard />} />
 
-        {/* User Routes */}
-        <Route path="/user" element={<UserDashboard />} />
-        <Route path="/user/profile" element={<UserProfile />} />
-        <Route path="/user/address-update" element={<AddressUpdateForm />} />
+          {/* User Routes */}
+          <Route path="/user" element={<UserDashboard />} />
+          <Route path="/user/profile" element={<UserProfile />} />
+          <Route path="/user/address-update" element={<AddressUpdateForm />} />
 
         {/* Default Route */}
         <Route path="/" element={<Navigate to="/login" />} />

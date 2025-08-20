@@ -77,9 +77,9 @@ function LoginPage() {
 
         if (fetching.status === 201) {
           if (selectedRole === 'Admin') navigate('/admin');
-          if (selectedRole === 'Warehouse Manager') navigate('/warehouse-dashboard');
-          if (selectedRole === 'Delivery Staff') navigate('/delivery-dashboard');
-          if (selectedRole === 'User') navigate('/user-dashboard'); // ✅ Added redirect
+          if (selectedRole === 'Warehouse Manager') navigate('/warehouse');
+          if (selectedRole === 'Delivery Staff') navigate('/delivery');
+          if (selectedRole === 'User') navigate('/user'); // ✅ Added redirect
         }
       } catch (error) {
         console.error("Login error:", error);
