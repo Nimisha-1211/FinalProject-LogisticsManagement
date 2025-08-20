@@ -5,34 +5,10 @@ import UserShipmentCard from '../../components/user/UserShipmentCard';
 const UserDashboard = () => {
   // Mock data
   const stats = [
-    {
-      title: 'Total Shipments',
-      value: '24',
-      change: '+12%',
-      icon: Package,
-      color: 'primary'
-    },
-    {
-      title: 'Active Shipments',
-      value: '8',
-      change: '+3',
-      icon: Clock,
-      color: 'warning'
-    },
-    {
-      title: 'Delivered',
-      value: '16',
-      change: '+8%',
-      icon: CheckCircle,
-      color: 'success'
-    },
-    {
-      title: 'Total Value',
-      value: '$12,450',
-      change: '+15%',
-      icon: TrendingUp,
-      color: 'info'
-    }
+    { title: 'Total Shipments', value: '24', change: '+12%', icon: Package, color: 'primary' },
+    { title: 'Active Shipments', value: '8', change: '+3', icon: Clock, color: 'warning' },
+    { title: 'Delivered', value: '16', change: '+8%', icon: CheckCircle, color: 'success' },
+    { title: 'Total Value', value: '$12,450', change: '+15%', icon: TrendingUp, color: 'info' }
   ];
 
   const recentShipments = [
@@ -105,17 +81,18 @@ const UserDashboard = () => {
         <div className="col-12 col-lg-6">
           <div className="d-flex justify-content-between align-items-center mb-3">
             <h2 className="h5 fw-semibold">Recent Shipments</h2>
-            <a href="/my-shipments" className="text-primary text-decoration-none small fw-medium">
+            <a href="/my-shipments" className="text-primary text-decoration-none small fw-semibold">
               View All
             </a>
           </div>
-          <div className="d-flex flex-column gap-3">
-            {recentShipments.map((shipment) => (
-              <UserShipmentCard
-                key={shipment.id}
-                shipment={shipment}
-                onClick={(shipment) => console.log('View shipment:', shipment.id)}
-              />
+          <div className="d-flex flex-column">
+            {recentShipments.map((shipment, i) => (
+              <div key={i} className="mb-3">
+                <UserShipmentCard
+                  shipment={shipment}
+                  onClick={(shipment) => console.log('View shipment:', shipment.id)}
+                />
+              </div>
             ))}
           </div>
         </div>
@@ -123,29 +100,29 @@ const UserDashboard = () => {
         {/* Quick Actions */}
         <div className="col-12 col-lg-6">
           <h2 className="h5 fw-semibold mb-3">Quick Actions</h2>
-          <div className="d-flex flex-column gap-3">
-            <button className="btn btn-primary text-start p-3">
-              <h6 className="fw-medium mb-1">Track a Shipment</h6>
+          <div className="d-flex flex-column">
+            <button className="btn btn-primary text-start mb-3 p-3">
+              <h6 className="fw-semibold mb-1">Track a Shipment</h6>
               <small className="text-light">Enter tracking number to get real-time updates</small>
             </button>
 
-            <button className="btn btn-success text-start p-3">
-              <h6 className="fw-medium mb-1">Create New Shipment</h6>
+            <button className="btn btn-success text-start mb-3 p-3">
+              <h6 className="fw-semibold mb-1">Create New Shipment</h6>
               <small className="text-light">Start a new shipping request</small>
             </button>
 
-            <button className="btn btn-info text-start p-3">
-              <h6 className="fw-medium mb-1">View History</h6>
+            <button className="btn btn-info text-start mb-3 p-3">
+              <h6 className="fw-semibold mb-1">View History</h6>
               <small className="text-light">Browse all your past shipments</small>
             </button>
 
             <div className="card shadow-sm border">
               <div className="card-body">
-                <h6 className="fw-medium mb-2">Need Help?</h6>
+                <h6 className="fw-semibold mb-2">Need Help?</h6>
                 <p className="text-muted small mb-2">
                   Have questions about your shipments or need assistance?
                 </p>
-                <button className="btn btn-link p-0 text-primary fw-medium small">
+                <button className="btn btn-link p-0 text-primary fw-semibold small">
                   Contact Support →
                 </button>
               </div>
