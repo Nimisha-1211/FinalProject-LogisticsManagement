@@ -18,7 +18,7 @@ import AddShipment from "./pages/Admin/AddShipment.jsx";
 import Warehouse from "./pages/Admin/Warehouse.jsx";
 import AssignDriver from "./pages/Admin/AssignDriver.jsx";
 import Reports from "./pages/Admin/Reports.jsx";
-import Settings from "./pages/Admin/Settings.jsx";
+import AdminSettings from "./pages/Admin/AdminSettings.jsx";
 import AssignTasks from "./pages/Admin/AssignTasks"; 
 import AssignVehicle from "./pages/Admin/AssignVehicle.jsx";
 import AssignManager from "./pages/Admin/AssignWarehouseManager.jsx";
@@ -26,6 +26,9 @@ import AssignRoute from "./pages/Admin/AssignRoute.jsx";
 
 // Warehouse Manager Pages
 import WarehouseDashboard from "./pages/WarehouseManager/WarehouseDashboard.jsx";
+import Inventory from "./pages/WarehouseManager/Inventory.jsx";
+import Orders from "./pages/WarehouseManager/Orders.jsx";
+import Settings from "./pages/WarehouseManager/Settings.jsx";
 
 // Delivery Staff Pages
 import DeliveryDashboard from "./pages/DeliveryStaff/DeliveryDashboard.jsx";
@@ -61,12 +64,17 @@ function App() {
           <Route path="assign-route" element={<AssignRoute />} />
           <Route path="assign-tasks" element={<AssignTasks />} />
           <Route path="reports" element={<Reports />} />
-          <Route path="settings" element={<Settings />} />
+          <Route path="AdminSettings" element={<AdminSettings />} />
         </Route>
 
 
         {/* Warehouse Manager Routes */}
-        <Route path="/warehouse" element={<WarehouseDashboard />} />
+         {/* Warehouse Manager Routes */}
+          <Route path="/warehouse-dashboard" element={<WarehouseDashboard />} />
+          <Route path="/inventory" element={<Inventory />} />
+          <Route path="/orders" element={<Orders />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/assign-driver" element={<AssignDriver />} />
 
         {/* Delivery Staff Routes */}
         <Route path="/delivery" element={<DeliveryDashboard />} />

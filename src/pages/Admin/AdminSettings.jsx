@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Form, Button, Card, Row, Col } from "react-bootstrap";
 
-const Settings = () => {
+const AdminSettings = () => {
   const [formData, setFormData] = useState({
     adminName: "",
     email: "",
@@ -79,4 +79,4 @@ const Settings = () => {
   );
 };
 
-export default Settings;
+export default AdminSettings;
