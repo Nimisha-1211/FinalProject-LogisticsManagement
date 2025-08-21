@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{useEffect}from 'react';
 import { Package, TrendingUp, Clock, CheckCircle } from 'lucide-react';
 import UserShipmentCard from '../../components/user/UserShipmentCard';
 
@@ -43,6 +43,21 @@ const UserDashboard = () => {
       value: '78.25'
     }
   ];
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await fetch("http://localhost:4000/orders/getorders", {
+          method: "GET"
+        });
+        const data = await res.json();
+        console.log(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+    fetchData();
+  }, []);
 
   return (
     <div className="container py-4">

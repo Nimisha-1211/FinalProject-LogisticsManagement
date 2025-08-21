@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import {
   Calendar,
   Download,
@@ -89,6 +89,21 @@ const ShipmentHistory = () => {
       deliveryTime: "5 days",
     },
   ];
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await fetch("http://localhost:4000/orders/getorders", {
+          method: "GET"
+        });
+        const data = await res.json();
+        console.log(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+    fetchData();
+  }, []);
 
   // Filter and sort shipments
   const filteredShipments = historicalShipments

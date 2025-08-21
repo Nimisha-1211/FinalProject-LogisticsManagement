@@ -38,6 +38,23 @@ function Inventory() {
     setInventory(mockItems);
   }, []);
 
+    useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await fetch("http://localhost:4000/shipments/getshipment", {
+          method: "GET"
+        });
+        const data = await res.json();
+        console.log(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+    fetchData();
+  }, []);
+
+
+
   const getStatus = (stock) => {
     if (stock === 0) return "out-of-stock";
     if (stock < 15) return "low-stock";

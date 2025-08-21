@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import "../../styles/admin/WarehouseDashboard.css";
 import { Link } from "react-router-dom";
 import {
@@ -24,6 +24,21 @@ function WarehouseDashboard() {
     { name: "Sports", value: 15 },
     { name: "Other", value: 5 },
   ];
+
+  useEffect(() => {
+      async function fetchData() {
+        try {
+          const res = await fetch("http://localhost:4000/shipments/getshipment", {
+            method: "GET"
+          });
+          const data = await res.json();
+          console.log(data);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      }
+      fetchData();
+    }, []);
 
   const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#ff6b6b", "#8dd1e1"];
 
