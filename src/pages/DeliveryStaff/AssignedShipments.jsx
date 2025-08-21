@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ShipmentCard from "./ShipmentCard";
+import ShipmentCard from "./DeliveryShipmentCard";
 
 function AssignedShipments() {
   const [shipments, setShipments] = useState([

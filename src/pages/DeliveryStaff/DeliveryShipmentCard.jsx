@@ -1,7 +1,7 @@
 import React from "react";
 import UpdateShipmentStatus from "./UpdateShipmentStatus";
 
-function ShipmentCard({ shipment, onStatusChange }) {
+function DeliveryShipmentCard({ shipment, onStatusChange }) {
   // ✅ Function to decide badge color
   const getBadgeClass = (status) => {
     switch (status) {
@@ -21,7 +21,7 @@ function ShipmentCard({ shipment, onStatusChange }) {
   return (
     <div className="card mb-3 shadow-sm">
       <div className="card-body">
-        <h5 className="card-title">Order ID: {shipment.orderId}</h5>
+        <h5 className="card-title">Order ID: {shipment.id}</h5>
         <h6 className="card-subtitle mb-2 text-muted">
           Customer: {shipment.customerName}
         </h6>
@@ -45,4 +45,4 @@ function ShipmentCard({ shipment, onStatusChange }) {
   );
 }
 
-export default ShipmentCard;
+export default DeliveryShipmentCard;

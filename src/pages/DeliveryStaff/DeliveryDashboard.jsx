@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "../../styles/admin/DeliveryDashboard.css";
 
 function DeliveryDashboard() {
   const [shipments, setShipments] = useState([
@@ -20,7 +19,7 @@ function DeliveryDashboard() {
   };
 
   return (
-    <div className="container-fluid p-4 delivery-dashboard">
+    <div>
       <h2 className="mb-4 text-center">🚚 Delivery Staff Dashboard</h2>
 
       <div className="row">
@@ -93,15 +92,8 @@ function DeliveryDashboard() {
           <p>Map integration coming soon... (Google Maps / Mapbox)</p>
         </div>
       </div>
-
-      {/* Logout */}
-      <div className="text-center">
-        <button className="btn btn-danger">🚪 Logout</button>
-      </div>
     </div>
   );
 }
-
-
 
 export default DeliveryDashboard;

@@ -35,6 +35,8 @@ import Settings from "./pages/WarehouseManager/Settings.jsx";
 import DeliveryDashboard from "./pages/DeliveryStaff/DeliveryDashboard.jsx";
 import AssignedShipments from "./pages/DeliveryStaff/AssignedShipments.jsx";
 import UpdateShipmentStatus from "./pages/DeliveryStaff/UpdateShipmentStatus.jsx";
+import DeliveryShipmentCard from "./pages/DeliveryStaff/DeliveryShipmentCard.jsx";
+import DeliveryLayout from "./pages/DeliveryStaff/DeliveryLayout.jsx"; // Delivery Layout with sidebar
 
 // User Pages
 import UserDashboard from "./pages/User/UserDashboard.jsx";
@@ -43,6 +45,7 @@ import AddressUpdateForm from "./components/user/AddressUpdateForm.jsx";
 import MyShipments from "./pages/User/MyShipments.jsx";
 import TrackShipment from "./pages/User/TrackShipment.jsx"
 import ShipmentHistory from "./pages/User/ShipmentHistory.jsx"
+import ShipmentCard from "./pages/DeliveryStaff/DeliveryShipmentCard.jsx";
 
 
 function App() {
@@ -86,9 +89,12 @@ function App() {
           <Route path="/assign-driver" element={<AssignDriver />} />
 
           {/* Delivery Staff Routes */}
-          <Route path="/delivery" element={<DeliveryDashboard />} />
-          <Route path="/assignedshipments" element={<AssignedShipments />} />
-          <Route path="/updateshipmentstatus" element={<UpdateShipmentStatus />} />
+           <Route path="/delivery" element={<DeliveryLayout />}>
+          <Route index element={<DeliveryDashboard />} />
+          <Route path="assigned" element={<AssignedShipments />} />
+          <Route path="update" element={<UpdateShipmentStatus />} />
+          <Route path="route" element={<div>Map Integration Page</div>} />
+        </Route>
 
           {/* User Routes */}
           <Route path="/user" element={<UserDashboard />} />
