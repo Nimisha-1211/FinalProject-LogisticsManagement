@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -10,6 +10,21 @@ const Orders = () => {
     { id: 2, name: "Order B", type: "Outbound", status: "Completed" },
     { id: 3, name: "Order C", type: "Inbound", status: "Cancelled" },
   ]);
+
+   useEffect(() => {
+      async function fetchData() {
+        try {
+          const res = await fetch("http://localhost:4000/shipments/getshipment", {
+            method: "GET"
+          });
+          const data = await res.json();
+          console.log(data);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      }
+      fetchData();
+    }, []);
 
   const [search, setSearch] = useState("");
   const [activeTab, setActiveTab] = useState("All");
@@ -74,6 +89,7 @@ const Orders = () => {
   const pending = orders.filter((o) => o.status === "Pending").length;
   const completed = orders.filter((o) => o.status === "Completed").length;
   const cancelled = orders.filter((o) => o.status === "Cancelled").length;
+
 
   return (
     <div className="orders-container">
